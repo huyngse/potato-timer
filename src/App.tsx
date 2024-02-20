@@ -44,7 +44,7 @@ function App() {
   const showNotification = () => {
     if (Notification.permission === "granted") {
       new Notification("PotatoTimer", {
-        body: "Pomodoro time out!",
+        body: "Your time is up!",
       });
     }
   };
