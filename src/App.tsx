@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import BellSound from "./assets/elevator-bell.mp3";
-import Clock from "./components/Clock.jsx";
+import Clock from "./components/Clock";
 import MorningBackground from "./assets/background-morning.jpg";
 import AfternoonBackground from "./assets/background-afternoon.jpg";
 import EveningBackground from "./assets/background-evening.jpg";
@@ -15,7 +15,7 @@ function App() {
   const backgroundRef = useRef<string>("");
 
   useEffect(() => {
-    let interval: number;
+    let interval: NodeJS.Timeout;
 
     if (seconds > 0 && !isPaused) {
       interval = setInterval(() => {

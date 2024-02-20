@@ -1,46 +1,54 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
-export default class Clock extends Component {
-  constructor(props) {
+type Props = Record<string, never>; // define the props type here
+type State = {
+  time: Date;
+}; // define the state type here
+
+export default class ClockComponent extends Component<Props, State> {
+  private timerId: NodeJS.Timeout | null = null;
+  constructor(props: Props) {
+    // add the type annotation for props
     super(props);
     this.state = {
-      time: new Date()
+      time: new Date(),
     };
   }
 
   componentDidMount() {
     this.timerId = setInterval(() => {
       this.setState({
-        time: new Date()
+        time: new Date(),
       });
     }, 1000);
     // clearInterval(this.timerId);
   }
 
-  componentWillMount() {
-    clearInterval(this.timerId);
+  componentWillUnmount() {
+    if (this.timerId) {
+      clearInterval(this.timerId);
+    }
   }
-
   render() {
     return (
       <div className="clock">
         <div
           className="hour_hand"
           style={{
-            transform: `rotateZ(${this.state.time.getHours() * 30}deg)`
-          }}
+            transform: `rotateZ(${this.state.time.getHours() * 30}deg)`,
+          }} // use template literals syntax
         />
         <div
           className="min_hand"
           style={{
-            transform: `rotateZ(${this.state.time.getMinutes() * 6}deg)`
-          }}
+            transform: `rotateZ(${this.state.time.getMinutes() * 6}deg)`,
+          }} // use template literals syntax
         />
         <div
           className="sec_hand"
           style={{
-            transform: `rotateZ(${this.state.time.getSeconds() * 6}deg)`
-          }}
+            transform: `rotateZ(${this.state.time.getSeconds() * 6}deg)`,
+          }} // use template literals syntax
         />
         <span className="twelve">12</span>
         <span className="one">1</span>
