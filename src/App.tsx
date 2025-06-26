@@ -8,6 +8,8 @@ import {
   playSoundEffect,
   showNotification,
 } from "./utils/clock";
+import FrutigerCard from "./components/FrutigerCard";
+import PaperButton from "./components/PaperButton";
 
 // Time Constants
 const DURATIONS: Record<TimerMode, number> = {
@@ -108,12 +110,12 @@ function App() {
 
   const addMinute = () => {
     setSeconds((prev) => prev + 60);
-  
+
     if (isTimeOut) {
       // Clear timeout and resume countdown
       setIsTimeOut(false);
       setIsPaused(false);
-      endTimeRef.current = Date.now() + (60 * 1000); // Start from 1 minute
+      endTimeRef.current = Date.now() + 60 * 1000; // Start from 1 minute
     } else if (!isPaused && endTimeRef.current) {
       endTimeRef.current += 60000; // Add 1 minute to the countdown
     }
@@ -134,59 +136,55 @@ function App() {
       className="background"
       style={{ backgroundImage: `url(${background})` }}
     >
-      <div className="flex justify-center items-center flex-col h-screen bg-[rgba(255,255,255,0.1)] gap-2">
-        {/* Mode Buttons */}
-        <div className="flex gap-2">
-          <button
-            onClick={subtractMinute}
-            className="bg-white opacity-70 text-center rounded-lg font-bold w-8 h-8 hover:opacity-90"
-          >
-            -
-          </button>
-          <button
-            onClick={() => switchMode("short")}
-            className="bg-white opacity-70 text-center rounded-lg font-bold w-8 h-8 hover:opacity-90"
-          >
-            5
-          </button>
-          <button
-            onClick={() => switchMode("long")}
-            className="bg-white opacity-70 text-center rounded-lg font-bold w-8 h-8 hover:opacity-90"
-          >
-            10
-          </button>
-          <button
-            onClick={() => switchMode("normal")}
-            className="bg-white opacity-70 text-center rounded-lg font-bold w-8 h-8 hover:opacity-90"
-          >
-            25
-          </button>
-          <button
-            onClick={addMinute}
-            className="bg-white opacity-70 text-center rounded-lg font-bold w-8 h-8 hover:opacity-90"
-          >
-            +
-          </button>
-        </div>
+      <div className="flex justify-center items-center flex-col h-screen bg-[rgba(255,255,255,0.1)] ">
+        <FrutigerCard className="flex flex-col gap-2 p-0" hover={false} variant="primary">
+          {/* Mode Buttons */}
+          <div className="flex gap-1 px-5 py-2 bg-white/80 rounded-lg">
+            <PaperButton onClick={subtractMinute} variant="danger">
+              -
+            </PaperButton>
+            <PaperButton onClick={() => switchMode("short")}>5</PaperButton>
+            <PaperButton onClick={() => switchMode("long")}>10</PaperButton>
+            <PaperButton onClick={() => switchMode("normal")}>25</PaperButton>
+            <PaperButton onClick={addMinute} variant="success">
+              +
+            </PaperButton>
+          </div>
 
-        {/* Clock */}
-        <div className="my-5">
-          <Clock />
-        </div>
+          {/* Clock */}
+          <div className="my-5">
+            <Clock />
+          </div>
 
-        {/* Timer & Controls */}
-        <div className="flex justify-center">
-          <div className="bg-[rgba(255,255,255,0.7)] shadow px-3 py-1 rounded-lg">
-            <h1 className="text-6xl text-center border-b border-b-black">
-              {formatTime(seconds)}
-            </h1>
-            <div className="flex gap-2 justify-between">
-              <button onClick={startTimer}>Start</button>
-              <button onClick={stopTimer}>Stop</button>
-              <button onClick={handleReset}>Reset</button>
+          {/* Timer & Controls */}
+          <div className="flex justify-center w-full">
+            <div className="px-16 py-3 bg-white/80 rounded-lg w-full">
+              <h1 className="text-6xl text-center border-b border-b-black">
+                {formatTime(seconds)}
+              </h1>
+              <div className="flex gap-2 justify-between">
+                <button
+                  onClick={startTimer}
+                  className="hover:text-blue-900 duration-300"
+                >
+                  Start
+                </button>
+                <button
+                  onClick={stopTimer}
+                  className="hover:text-blue-900 duration-300"
+                >
+                  Stop
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="hover:text-blue-900 duration-300"
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </FrutigerCard>
       </div>
     </div>
   );
