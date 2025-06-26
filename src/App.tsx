@@ -38,9 +38,7 @@ function App() {
   // Countdown Logic
   useEffect(() => {
     if (!isPaused && !isTimeOut) {
-      if (!endTimeRef.current) {
-        endTimeRef.current = Date.now() + seconds * 1000;
-      }
+      endTimeRef.current ??= Date.now() + seconds * 1000;
 
       intervalRef.current = setInterval(() => {
         const remaining = Math.max(
@@ -57,15 +55,14 @@ function App() {
           playSoundEffect();
           showNotification();
         }
-      }, 200); // slight buffer for responsiveness
+      }, 500);
 
       return () => clearInterval(intervalRef.current!);
     }
 
-    // If paused manually
     clearInterval(intervalRef.current!);
     endTimeRef.current = null;
-  }, [isPaused]);
+  }, [isPaused, isTimeOut, seconds]);
 
   // Dynamic document title
   useEffect(() => {
@@ -80,16 +77,56 @@ function App() {
 
   // Timer mode handlers
   const switchMode = (newMode: TimerMode) => {
+    clearInterval(intervalRef.current!); // Stop current timer
+
+    const duration = DURATIONS[newMode];
     setMode(newMode);
-    setSeconds(DURATIONS[newMode]);
-    setIsPaused(false);
+    setSeconds(duration);
+    setIsPaused(false); // Let user restart manually or control this explicitly
     setIsTimeOut(false);
+    endTimeRef.current = null;
+  };
+
+  const startTimer = () => {
+    if (!isPaused || seconds <= 0) return;
+    endTimeRef.current = Date.now() + seconds * 1000;
+    setIsPaused(false);
+  };
+
+  const stopTimer = () => {
+    setIsPaused(true);
   };
 
   const handleReset = () => {
-    setSeconds(DURATIONS[mode]);
+    clearInterval(intervalRef.current!);
+    const duration = DURATIONS[mode];
+    setSeconds(duration);
     setIsPaused(true);
     setIsTimeOut(false);
+    endTimeRef.current = null;
+  };
+
+  const addMinute = () => {
+    setSeconds((prev) => prev + 60);
+  
+    if (isTimeOut) {
+      // Clear timeout and resume countdown
+      setIsTimeOut(false);
+      setIsPaused(false);
+      endTimeRef.current = Date.now() + (60 * 1000); // Start from 1 minute
+    } else if (!isPaused && endTimeRef.current) {
+      endTimeRef.current += 60000; // Add 1 minute to the countdown
+    }
+  };
+
+  const subtractMinute = () => {
+    setSeconds((prev) => {
+      const newTime = Math.max(0, prev - 60);
+      if (!isPaused && endTimeRef.current) {
+        endTimeRef.current = Math.max(Date.now(), endTimeRef.current - 60000);
+      }
+      return newTime;
+    });
   };
 
   return (
@@ -100,6 +137,12 @@ function App() {
       <div className="flex justify-center items-center flex-col h-screen bg-[rgba(255,255,255,0.1)] gap-2">
         {/* Mode Buttons */}
         <div className="flex gap-2">
+          <button
+            onClick={subtractMinute}
+            className="bg-white opacity-70 text-center rounded-lg font-bold w-8 h-8 hover:opacity-90"
+          >
+            -
+          </button>
           <button
             onClick={() => switchMode("short")}
             className="bg-white opacity-70 text-center rounded-lg font-bold w-8 h-8 hover:opacity-90"
@@ -118,6 +161,12 @@ function App() {
           >
             25
           </button>
+          <button
+            onClick={addMinute}
+            className="bg-white opacity-70 text-center rounded-lg font-bold w-8 h-8 hover:opacity-90"
+          >
+            +
+          </button>
         </div>
 
         {/* Clock */}
@@ -132,8 +181,8 @@ function App() {
               {formatTime(seconds)}
             </h1>
             <div className="flex gap-2 justify-between">
-              <button onClick={() => setIsPaused(false)}>Start</button>
-              <button onClick={() => setIsPaused(true)}>Stop</button>
+              <button onClick={startTimer}>Start</button>
+              <button onClick={stopTimer}>Stop</button>
               <button onClick={handleReset}>Reset</button>
             </div>
           </div>
