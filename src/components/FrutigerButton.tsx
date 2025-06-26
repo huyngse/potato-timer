@@ -30,16 +30,16 @@ const FrutigerButton = ({
 
   const variantClasses = {
     primary:
-      "bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-400 shadow-blue-500/30 hover:shadow-blue-500/40",
+      "bg-linear-to-br from-blue-400 via-cyan-400 to-teal-400 shadow-blue-500/30 hover:shadow-blue-500/40",
     secondary:
-      "bg-gradient-to-br from-emerald-400/80 via-teal-400/80 to-cyan-400/80 shadow-emerald-500/25 hover:shadow-emerald-500/35 backdrop-blur-sm border border-white/30",
+      "bg-linear-to-br from-emerald-400/80 via-teal-400/80 to-cyan-400/80 shadow-emerald-500/25 hover:shadow-emerald-500/35 backdrop-blur-xs border border-white/30",
     accent:
-      "bg-gradient-to-br from-violet-400 via-purple-400 to-pink-400 shadow-violet-500/30 hover:shadow-violet-500/40",
-    warm: "bg-gradient-to-br from-amber-400 via-orange-400 to-red-400 shadow-orange-500/30 hover:shadow-orange-500/40",
+      "bg-linear-to-br from-violet-400 via-purple-400 to-pink-400 shadow-violet-500/30 hover:shadow-violet-500/40",
+    warm: "bg-linear-to-br from-amber-400 via-orange-400 to-red-400 shadow-orange-500/30 hover:shadow-orange-500/40",
     success:
-      "bg-gradient-to-br from-green-400 via-emerald-400 to-teal-400 shadow-green-500/30 hover:shadow-green-500/40",
+      "bg-linear-to-br from-green-400 via-emerald-400 to-teal-400 shadow-green-500/30 hover:shadow-green-500/40",
     danger:
-      "bg-gradient-to-br from-red-400 via-pink-400 to-rose-400 shadow-red-500/30 hover:shadow-red-500/40",
+      "bg-linear-to-br from-red-400 via-pink-400 to-rose-400 shadow-red-500/30 hover:shadow-red-500/40",
   };
 
   const baseClasses = `
@@ -61,19 +61,19 @@ const FrutigerButton = ({
       {...props}
     >
       {/* Glass reflection overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-transparent rounded-inherit"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-white/40 via-white/20 to-transparent rounded-inherit"></div>
 
       {/* Animated highlight sweep */}
       <div
         className={`
-          absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent
+          absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent
           transform transition-transform duration-700 ease-out
           ${isHovered ? "translate-x-full" : "-translate-x-full"}
           skew-x-12
         `}
       ></div>
 
-      <span className="relative z-10 text-white drop-shadow-sm">
+      <span className="relative z-10 text-white drop-shadow-xs">
         {children}
       </span>
     </button>

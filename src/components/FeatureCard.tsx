@@ -34,12 +34,12 @@ const FeatureCard = ({
 
   const variantClasses = {
     primary:
-      "bg-gradient-to-br from-blue-500/30 via-cyan-500/30 to-teal-500/30 border-blue-400/50",
+      "bg-linear-to-br from-blue-500/30 via-cyan-500/30 to-teal-500/30 border-blue-400/50",
     secondary:
-      "bg-gradient-to-br from-emerald-500/30 via-teal-500/30 to-cyan-500/30 border-emerald-400/50",
+      "bg-linear-to-br from-emerald-500/30 via-teal-500/30 to-cyan-500/30 border-emerald-400/50",
     accent:
-      "bg-gradient-to-br from-violet-500/30 via-purple-500/30 to-pink-500/30 border-violet-400/50",
-    warm: "bg-gradient-to-br from-amber-500/30 via-orange-500/30 to-red-500/30 border-amber-400/50",
+      "bg-linear-to-br from-violet-500/30 via-purple-500/30 to-pink-500/30 border-violet-400/50",
+    warm: "bg-linear-to-br from-amber-500/30 via-orange-500/30 to-red-500/30 border-amber-400/50",
   };
 
   const glowClasses = {
@@ -68,13 +68,13 @@ const FeatureCard = ({
       {...props}
     >
       {/* Multiple glass layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-transparent rounded-inherit pointer-events-none"></div>
-      <div className="absolute inset-2 bg-gradient-to-tl from-white/20 via-transparent to-white/30 rounded-inherit pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-white/40 via-white/20 to-transparent rounded-inherit pointer-events-none"></div>
+      <div className="absolute inset-2 bg-linear-to-tl from-white/20 via-transparent to-white/30 rounded-inherit pointer-events-none"></div>
 
       {/* Animated highlight sweep */}
       <div
         className={`
-          absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent
+          absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent
           transform transition-transform duration-1000 ease-out pointer-events-none
           ${isHovered ? "translate-x-full" : "-translate-x-full"}
           skew-x-12
@@ -96,7 +96,7 @@ const FeatureCard = ({
         )}
 
         {title && (
-          <h3 className="text-xl font-semibold text-gray-800 drop-shadow-sm">
+          <h3 className="text-xl font-semibold text-gray-800 drop-shadow-xs">
             {title}
           </h3>
         )}

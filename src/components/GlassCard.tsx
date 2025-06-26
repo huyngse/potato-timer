@@ -26,7 +26,7 @@ const GlassCard = ({
   };
 
   const intensityClasses = {
-    light: "backdrop-blur-sm bg-white/10",
+    light: "backdrop-blur-xs bg-white/10",
     medium: "backdrop-blur-md bg-white/15",
     heavy: "backdrop-blur-lg bg-white/20",
     ultra: "backdrop-blur-xl bg-white/25",
@@ -54,8 +54,8 @@ const GlassCard = ({
       {...props}
     >
       {/* Multiple glass layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-transparent rounded-inherit pointer-events-none"></div>
-      <div className="absolute inset-2 bg-gradient-to-tl from-white/20 via-transparent to-white/30 rounded-inherit pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-white/40 via-white/20 to-transparent rounded-inherit pointer-events-none"></div>
+      <div className="absolute inset-2 bg-linear-to-tl from-white/20 via-transparent to-white/30 rounded-inherit pointer-events-none"></div>
 
       <div className="relative z-10">{children}</div>
     </div>

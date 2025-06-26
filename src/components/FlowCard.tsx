@@ -28,12 +28,12 @@ const FlowCard = ({
 
   const variantClasses = {
     primary:
-      "bg-gradient-to-br from-blue-400/20 via-cyan-400/20 to-teal-400/20 border-blue-400/30",
+      "bg-linear-to-br from-blue-400/20 via-cyan-400/20 to-teal-400/20 border-blue-400/30",
     secondary:
-      "bg-gradient-to-br from-emerald-400/20 via-teal-400/20 to-cyan-400/20 border-emerald-400/30",
+      "bg-linear-to-br from-emerald-400/20 via-teal-400/20 to-cyan-400/20 border-emerald-400/30",
     accent:
-      "bg-gradient-to-br from-violet-400/20 via-purple-400/20 to-pink-400/20 border-violet-400/30",
-    warm: "bg-gradient-to-br from-amber-400/20 via-orange-400/20 to-red-400/20 border-amber-400/30",
+      "bg-linear-to-br from-violet-400/20 via-purple-400/20 to-pink-400/20 border-violet-400/30",
+    warm: "bg-linear-to-br from-amber-400/20 via-orange-400/20 to-red-400/20 border-amber-400/30",
   };
 
   const flowPatterns = {
@@ -43,7 +43,7 @@ const FlowCard = ({
   };
 
   const baseClasses = `
-      relative overflow-hidden backdrop-blur-sm border
+      relative overflow-hidden backdrop-blur-xs border
       shadow-xl transform transition-all duration-500 ease-out
       hover:scale-[1.02] hover:-translate-y-1 hover:shadow-2xl
       ${onClick ? "cursor-pointer" : ""}
@@ -84,7 +84,7 @@ const FlowCard = ({
       </div>
 
       {/* Glass overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-white/10 to-transparent rounded-inherit pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-white/25 via-white/10 to-transparent rounded-inherit pointer-events-none"></div>
 
       <div className="relative z-10">{children}</div>
     </div>

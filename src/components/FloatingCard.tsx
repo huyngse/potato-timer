@@ -27,16 +27,16 @@ const FloatingCard = ({
 
   const variantClasses = {
     primary:
-      "bg-gradient-to-br from-blue-400/25 via-cyan-400/25 to-teal-400/25 border-blue-400/40 shadow-blue-400/30",
+      "bg-linear-to-br from-blue-400/25 via-cyan-400/25 to-teal-400/25 border-blue-400/40 shadow-blue-400/30",
     secondary:
-      "bg-gradient-to-br from-emerald-400/25 via-teal-400/25 to-cyan-400/25 border-emerald-400/40 shadow-emerald-400/30",
+      "bg-linear-to-br from-emerald-400/25 via-teal-400/25 to-cyan-400/25 border-emerald-400/40 shadow-emerald-400/30",
     accent:
-      "bg-gradient-to-br from-violet-400/25 via-purple-400/25 to-pink-400/25 border-violet-400/40 shadow-violet-400/30",
-    warm: "bg-gradient-to-br from-amber-400/25 via-orange-400/25 to-red-400/25 border-amber-400/40 shadow-amber-400/30",
+      "bg-linear-to-br from-violet-400/25 via-purple-400/25 to-pink-400/25 border-violet-400/40 shadow-violet-400/30",
+    warm: "bg-linear-to-br from-amber-400/25 via-orange-400/25 to-red-400/25 border-amber-400/40 shadow-amber-400/30",
   };
 
   const baseClasses = `
-      relative overflow-hidden backdrop-blur-sm border
+      relative overflow-hidden backdrop-blur-xs border
       shadow-2xl transform transition-all duration-500 ease-out
       hover:scale-[1.03] hover:-translate-y-2 hover:shadow-3xl
       ${onClick ? "cursor-pointer" : ""}
@@ -79,7 +79,7 @@ const FloatingCard = ({
       </div>
 
       {/* Glass overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-white/15 to-transparent rounded-inherit pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-white/30 via-white/15 to-transparent rounded-inherit pointer-events-none"></div>
 
       <div className="relative z-10">{children}</div>
     </div>

@@ -30,12 +30,12 @@ const BubbleButton = ({
 
   const variantClasses = {
     primary:
-      "bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-400 shadow-blue-500/30 hover:shadow-blue-500/40",
+      "bg-linear-to-br from-blue-400 via-cyan-400 to-teal-400 shadow-blue-500/30 hover:shadow-blue-500/40",
     secondary:
-      "bg-gradient-to-br from-emerald-400 via-teal-400 to-cyan-400 shadow-emerald-500/30 hover:shadow-emerald-500/40",
+      "bg-linear-to-br from-emerald-400 via-teal-400 to-cyan-400 shadow-emerald-500/30 hover:shadow-emerald-500/40",
     accent:
-      "bg-gradient-to-br from-violet-400 via-purple-400 to-pink-400 shadow-violet-500/30 hover:shadow-violet-500/40",
-    warm: "bg-gradient-to-br from-amber-400 via-orange-400 to-red-400 shadow-orange-500/30 hover:shadow-orange-500/40",
+      "bg-linear-to-br from-violet-400 via-purple-400 to-pink-400 shadow-violet-500/30 hover:shadow-violet-500/40",
+    warm: "bg-linear-to-br from-amber-400 via-orange-400 to-red-400 shadow-orange-500/30 hover:shadow-orange-500/40",
   };
 
   const baseClasses = `
@@ -81,8 +81,8 @@ const BubbleButton = ({
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-transparent rounded-inherit"></div>
-      <span className="relative z-10 text-white drop-shadow-sm">
+      <div className="absolute inset-0 bg-linear-to-br from-white/40 via-white/20 to-transparent rounded-inherit"></div>
+      <span className="relative z-10 text-white drop-shadow-xs">
         {children}
       </span>
     </button>

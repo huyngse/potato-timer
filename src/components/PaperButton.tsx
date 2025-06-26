@@ -22,9 +22,9 @@ const PaperButton = ({
       inline-flex items-center justify-center
       font-medium rounded-md
       transition-all duration-200 ease-in-out
-      focus:outline-none focus:ring-2 focus:ring-offset-2
+      focus:outline-hidden focus:ring-2 focus:ring-offset-2
       transform active:scale-95
-      shadow-md hover:shadow-lg active:shadow-sm
+      shadow-md hover:shadow-lg active:shadow-xs
       disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
     `;
 

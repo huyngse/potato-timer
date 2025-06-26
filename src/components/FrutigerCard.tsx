@@ -30,15 +30,15 @@ const FrutigerCard = ({
 
   const variantClasses = {
     primary:
-      "bg-gradient-to-br from-blue-400/20 via-cyan-400/20 to-teal-400/20 border-blue-400/30",
+      "bg-linear-to-br from-blue-400/20 via-cyan-400/20 to-teal-400/20 border-blue-400/30",
     secondary:
-      "bg-gradient-to-br from-emerald-400/20 via-teal-400/20 to-cyan-400/20 border-emerald-400/30",
+      "bg-linear-to-br from-emerald-400/20 via-teal-400/20 to-cyan-400/20 border-emerald-400/30",
     accent:
-      "bg-gradient-to-br from-violet-400/20 via-purple-400/20 to-pink-400/20 border-violet-400/30",
-    warm: "bg-gradient-to-br from-amber-400/20 via-orange-400/20 to-red-400/20 border-amber-400/30",
+      "bg-linear-to-br from-violet-400/20 via-purple-400/20 to-pink-400/20 border-violet-400/30",
+    warm: "bg-linear-to-br from-amber-400/20 via-orange-400/20 to-red-400/20 border-amber-400/30",
     neutral:
-      "bg-gradient-to-br from-gray-400/20 via-slate-400/20 to-gray-400/20 border-gray-400/30",
-    dark: "bg-gradient-to-br from-gray-800/40 via-slate-800/40 to-gray-900/40 border-gray-700/50",
+      "bg-linear-to-br from-gray-400/20 via-slate-400/20 to-gray-400/20 border-gray-400/30",
+    dark: "bg-linear-to-br from-gray-800/40 via-slate-800/40 to-gray-900/40 border-gray-700/50",
   };
 
   const glowClasses = {
@@ -51,7 +51,7 @@ const FrutigerCard = ({
   };
 
   const baseClasses = `
-      relative overflow-hidden backdrop-blur-sm border
+      relative overflow-hidden backdrop-blur-xs border
       ${
         hover
           ? "transform transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1"
@@ -74,13 +74,13 @@ const FrutigerCard = ({
       {...props}
     >
       {/* Glass reflection overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-white/10 to-transparent rounded-inherit pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-white/30 via-white/10 to-transparent rounded-inherit pointer-events-none"></div>
 
       {/* Animated highlight sweep */}
       {hover && (
         <div
           className={`
-            absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+            absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent
             transform transition-transform duration-1000 ease-out pointer-events-none
             ${isHovered ? "translate-x-full" : "-translate-x-full"}
             skew-x-12

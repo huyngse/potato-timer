@@ -54,7 +54,7 @@ const Clock = () => {
       {/* Watch Container */}
       <div className="relative w-64 h-64 mx-auto">
         {/* Outer Shadow */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-600 to-black shadow-2xl transform rotate-45"></div>
+        <div className="absolute inset-0 rounded-full bg-linear-to-br from-gray-600 to-black shadow-2xl transform rotate-45"></div>
 
         {/* Main Watch Face */}
         <div
@@ -163,7 +163,7 @@ const Clock = () => {
           <div className="absolute top-1/2 left-1/2 w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 bg-black rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-lg border-2 border-white/20"></div>
 
           {/* Digital Time Display */}
-          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs font-mono">
+          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded-sm text-xs font-mono">
             {time.toLocaleTimeString()}
           </div>
         </div>
