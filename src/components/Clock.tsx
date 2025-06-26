@@ -1,68 +1,55 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 
-type Props = Record<string, never>; // define the props type here
-type State = {
-  time: Date;
-}; // define the state type here
+const Clock = () => {
+  const [now, setNow] = useState(Date.now());
 
-export default class ClockComponent extends Component<Props, State> {
-  private timerId: NodeJS.Timeout | null = null;
-  constructor(props: Props) {
-    // add the type annotation for props
-    super(props);
-    this.state = {
-      time: new Date(),
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const update = () => {
+      setNow(Date.now());
+      animationFrameId = requestAnimationFrame(update);
     };
-  }
 
-  componentDidMount() {
-    this.timerId = setInterval(() => {
-      this.setState({
-        time: new Date(),
-      });
-    }, 1000);
-    // clearInterval(this.timerId);
-  }
+    animationFrameId = requestAnimationFrame(update);
 
-  componentWillUnmount() {
-    if (this.timerId) {
-      clearInterval(this.timerId);
-    }
-  }
-  render() {
-    return (
-      <div className="clock">
-        <div
-          className="hour_hand"
-          style={{
-            transform: `rotateZ(${this.state.time.getHours() * 30}deg)`,
-          }} // use template literals syntax
-        />
-        <div
-          className="min_hand"
-          style={{
-            transform: `rotateZ(${this.state.time.getMinutes() * 6}deg)`,
-          }} // use template literals syntax
-        />
-        <div
-          className="sec_hand"
-          style={{
-            transform: `rotateZ(${this.state.time.getSeconds() * 6}deg)`,
-          }} // use template literals syntax
-        />
-        <span className="twelve">12</span>
-        <span className="one">1</span>
-        <span className="two">2</span>
-        <span className="three">3</span>
-        <span className="four">4</span>
-        <span className="five">5</span>
-        <span className="six">6</span>
-        <span className="seven">7</span>
-        <span className="eight">8</span>
-        <span className="nine">9</span>
-        <span className="ten">10</span>
-        <span className="eleven">11</span>
-      </div>
-    );
-  }
-}
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
+
+  const time = new Date(now);
+  const hourDeg = time.getHours() * 30 + time.getMinutes() * 0.5;
+  const minuteDeg = time.getMinutes() * 6;
+  const secondDeg = time.getSeconds() * 6;
+
+  return (
+    <div className="clock">
+      <div
+        className="hour_hand"
+        style={{ transform: `rotateZ(${hourDeg}deg)` }}
+      />
+      <div
+        className="min_hand"
+        style={{ transform: `rotateZ(${minuteDeg}deg)` }}
+      />
+      <div
+        className="sec_hand"
+        style={{ transform: `rotateZ(${secondDeg}deg)` }}
+      />
+
+      <span className="twelve">12</span>
+      <span className="one">1</span>
+      <span className="two">2</span>
+      <span className="three">3</span>
+      <span className="four">4</span>
+      <span className="five">5</span>
+      <span className="six">6</span>
+      <span className="seven">7</span>
+      <span className="eight">8</span>
+      <span className="nine">9</span>
+      <span className="ten">10</span>
+      <span className="eleven">11</span>
+    </div>
+  );
+};
+
+export default Clock;
