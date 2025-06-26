@@ -170,7 +170,7 @@ function App() {
         </div>
 
         {/* Clock */}
-        <div className="relative w-[300px] h-[300px]">
+        <div className="my-5">
           <Clock />
         </div>
 
