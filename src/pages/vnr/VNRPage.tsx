@@ -122,6 +122,7 @@ const VNRPage = () => {
             verticalScroll: true,
             zoomKey: "ctrlKey",
             height: "92vh",
+            groupHeightMode: "fixed"
           }}
           style={{
             height: "92vh",
