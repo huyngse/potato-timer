@@ -32,3 +32,25 @@
 button {
   cursor: pointer;
 }
+
+@layer utilities {
+
+  /* Chrome, Safari, Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Firefox */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  /* IE, Edge */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+  }
+}
+
+.font-frutiger {
+  font-family: Segoe UI, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+}
