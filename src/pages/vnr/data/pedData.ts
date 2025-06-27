@@ -6,7 +6,7 @@ export const ped = [
         content: "Thời kỳ Pháp đô hộ (1858-1945)",
         start: "1858-09-01",
         end: "1945-08-19",
-        style: "background: #7f1d1d;color:white;font-weight:bold;",
+        style: "background: #7f1d1d99;color:white;font-weight:bold;",
         type: "background",
     },
     {
@@ -14,7 +14,7 @@ export const ped = [
         content: "Kháng chiến chống Pháp (1945-1954)",
         start: "1945-08-19",
         end: "1954-07-20",
-        style: "background: #c2410c;color:white;font-weight:bold;",
+        style: "background: #c2410c99;color:white;font-weight:bold;",
         type: "background",
     },
     {
@@ -22,7 +22,7 @@ export const ped = [
         content: "Kháng chiến chống Mỹ (1954-1975)",
         start: "1954-07-20",
         end: "1975-04-30",
-        style: "background: #a21caf;color:white;font-weight:bold;",
+        style: "background: #a21caf99;color:white;font-weight:bold;",
         type: "background",
     },
     {
@@ -30,7 +30,7 @@ export const ped = [
         content: "Thời kỳ hậu chiến và bao cấp (1975-1986)",
         start: "1975-04-30",
         end: "1986-12-18",
-        style: "background: #a78bfa;color:white;font-weight:bold;",
+        style: "background: #a78bfa99;color:white;font-weight:bold;",
         type: "background",
     },
     {
@@ -38,7 +38,7 @@ export const ped = [
         content: "Thời kỳ đổi mới và hội nhập (1986 - nay)",
         start: "1986-12-18",
         end: formatDate(new Date()),
-        style: "background: #60a5fa;color:white;font-weight:bold;",
+        style: "background: #60a5fa99;color:white;font-weight:bold;",
         type: "background",
     },
 ]

@@ -12,6 +12,8 @@ import { ped } from "./data/pedData";
 import { useEffect, useRef, useState } from "react";
 import GlassButton from "@/components/GlassButton";
 import { LuZoomIn, LuZoomOut } from "react-icons/lu";
+import background from "@/assets/background-afternoon.jpg";
+
 const VNRPage = () => {
   const [_, setCounter] = useState(0);
   const timelineRef = useRef<TimelineHandle>(null);
@@ -34,7 +36,10 @@ const VNRPage = () => {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div
+      className="h-screen"
+      style={{ background: `url(${background})`, backgroundSize: "cover" }}
+    >
       <div className="h-[8vh] flex justify-center items-center gap-3 px-2">
         <GlassButton
           size="small"
@@ -80,44 +85,49 @@ const VNRPage = () => {
           size="small"
           variant="accent"
           onClick={() => {
-            timelineRef.current?.zoomOut(0.4);
+            timelineRef.current?.zoomOut(0.8);
           }}
         >
-          <LuZoomOut className="text-lg"/>
+          <LuZoomOut className="text-lg" />
         </GlassButton>
         <GlassButton
           size="small"
           variant="accent"
           onClick={() => {
-            timelineRef.current?.zoomIn(0.4);
+            timelineRef.current?.zoomIn(0.8);
           }}
         >
-          <LuZoomIn className="text-lg"/>
+          <LuZoomIn className="text-lg" />
         </GlassButton>
       </div>
-      <TimelineWrapper
-        ref={timelineRef}
-        items={items}
-        groups={groups}
-        onSelect={(e) => {
-          console.log(e);
-        }}
-        options={{
-          start: "2020-01-01",
-          end: "2025-01-01",
-          min: "1850-01-01",
-          max: "2030-01-01",
-          zoomMax: 315_576_000_000,
-          zoomMin: 2_635_200_000,
-          orientation: {
-            axis: "both",
-            item: "top",
-          },
-          verticalScroll: true,
-          zoomKey: "ctrlKey",
-          height: "92vh",
-        }}
-      />
+      <div className="bg-black/55">
+        <TimelineWrapper
+          ref={timelineRef}
+          items={items}
+          groups={groups}
+          onSelect={(e) => {
+            console.log(e);
+          }}
+          options={{
+            start: "2020-01-01",
+            end: "2025-01-01",
+            min: "1850-01-01",
+            max: "2030-01-01",
+            zoomMax: 315_576_000_000,
+            zoomMin: 2_635_200_000,
+            orientation: {
+              axis: "both",
+              item: "top",
+            },
+            verticalScroll: true,
+            zoomKey: "ctrlKey",
+            height: "92vh",
+          }}
+          style={{
+            height: "92vh",
+          }}
+        />
+      </div>
     </div>
   );
 };
