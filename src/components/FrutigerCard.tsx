@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { ButtonHTMLAttributes, ReactNode, useState } from "react";
 
 type FrutigerCardProps = {
@@ -67,7 +68,12 @@ const FrutigerCard = ({
 
   return (
     <div
-      className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+      className={cn(
+        baseClasses,
+        sizeClasses[size],
+        variantClasses[variant],
+        className
+      )}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

@@ -23,7 +23,6 @@ const TimerPage = () => {
   const [isPaused, setIsPaused] = useState(true);
   const [isTimeOut, setIsTimeOut] = useState(false);
   const [mode, setMode] = useState<TimerMode>("normal");
-  const [hideContainer, setHideContainer] = useState(false);
 
   const timeOfDay = useMemo(getTimeOfDay, []);
   const background = useMemo(() => getBackground(timeOfDay), [timeOfDay]);
@@ -81,7 +80,7 @@ const TimerPage = () => {
       playSoundEffect();
       showNotification();
     }
-  }, [isTimeOut])
+  }, [isTimeOut]);
 
   // Timer mode handlers
   const switchMode = (newMode: TimerMode) => {
@@ -137,10 +136,6 @@ const TimerPage = () => {
     });
   };
 
-  const handleTogglePomodoro = () => {
-    setHideContainer((prev) => !prev);
-  };
-
   return (
     <div
       className="background"
@@ -148,9 +143,7 @@ const TimerPage = () => {
     >
       <div className="flex justify-center items-center flex-col h-screen bg-[rgba(255,255,255,0.1)] ">
         <FrutigerCard
-          className={`flex flex-col items-center gap-2 p-0 ${
-            hideContainer && "invisible w-full"
-          }`}
+          className={`flex flex-col items-center gap-2 p-0`}
           hover={false}
           variant="primary"
           style={{
@@ -173,14 +166,8 @@ const TimerPage = () => {
           {/* Clock */}
           <div
             className="my-5 flex justify-center"
-            style={{ visibility: "visible" }}
           >
-            <div
-              className="rounded-full cursor-pointer"
-              onClick={handleTogglePomodoro}
-            >
-              <Clock />
-            </div>
+            <Clock />
           </div>
 
           {/* Timer & Controls */}
