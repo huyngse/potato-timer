@@ -1,6 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { Timeline } from "vis-timeline/standalone";
-import "vis-timeline/styles/vis-timeline-graph2d.min.css";
 
 interface TimelineProps {
   items: any;

@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-
+import "vis-timeline/styles/vis-timeline-graph2d.min.css";
 import "@/styles/index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 

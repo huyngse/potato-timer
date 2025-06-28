@@ -4,7 +4,7 @@ import { TBT_STYLE } from "../itemStyle";
 const GROUP_ID = 5;
 
 const getImageElement = (content: string, url: string) => {
-    return `<div><img width="100" src="${url}">${content}</div>`
+    return `<div><img width="100" height="150" src="${url}">${content}</div>`
 }
 
 export const tbt = [
