@@ -4,6 +4,10 @@ export const grp = [
         content: "Giai đoạn",
     },
     {
+        id: 2,
+        content: "Sự kiện thế giới",
+    },
+    {
         id: 4,
         content: "Sự kiện tiêu biểu",
     },

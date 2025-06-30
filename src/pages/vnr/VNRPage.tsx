@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import GlassButton from "@/components/GlassButton";
 import { LuZoomIn, LuZoomOut } from "react-icons/lu";
 import background from "@/assets/background-afternoon.jpg";
+import { wlde } from "./data/wldeData";
 
 const VNRPage = () => {
   const [_, setCounter] = useState(0);
@@ -26,6 +27,7 @@ const VNRPage = () => {
     ...tbt,
     ...dhd,
     ...ped,
+    ...wlde
   ]);
 
   const groups = new DataSet([...grp]);
@@ -109,8 +111,8 @@ const VNRPage = () => {
             console.log(e);
           }}
           options={{
-            start: "2020-01-01",
-            end: "2025-01-01",
+            start: "1942-01-01",
+            end: "1947-01-01",
             min: "1850-01-01",
             max: "2030-01-01",
             zoomMax: 315_576_000_000,
@@ -122,7 +124,7 @@ const VNRPage = () => {
             verticalScroll: true,
             zoomKey: "ctrlKey",
             height: "92vh",
-            groupHeightMode: "fixed"
+            // groupHeightMode: "fixed"
           }}
           style={{
             height: "92vh",
