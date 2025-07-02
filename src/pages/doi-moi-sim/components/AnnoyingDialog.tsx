@@ -122,7 +122,9 @@ export function useSpawnModals(
  * Component: ModalManager
  * Renders all active modals. Each must be dragged off-screen to dismiss.
  */
-export const ModalManager: React.FC = () => {
+export const ModalManager: React.FC<{ brightness?: number }> = ({
+  brightness = 1,
+}) => {
   const { modals, removeModal } = useSpawnModals();
 
   const handleStop = (_: DraggableEvent, data: DraggableData, id: number) => {
@@ -149,7 +151,7 @@ export const ModalManager: React.FC = () => {
         >
           <div
             className="fixed w-48 p-4 bg-white shadow-lg cursor-move"
-            style={{ zIndex: 1000 }}
+            style={{ zIndex: 1000, filter: `brightness(${brightness})` }}
           >
             <p>{text}</p>
           </div>

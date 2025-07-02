@@ -62,6 +62,7 @@ const VietnamReformGame: React.FC = () => {
     selectedChoice: null,
     isStarted: false,
   });
+  const [brightness, setBrightness] = useState(1);
 
   const [usedScenarios, setUsedScenarios] = useState<number[]>([]);
 
@@ -72,6 +73,15 @@ const VietnamReformGame: React.FC = () => {
     const randomIndex = Math.floor(Math.random() * availableScenarios.length);
     return applyScenarioWeights(availableScenarios[randomIndex], superWeights);
   };
+
+  useEffect(() => {
+    if (!gameState.isStarted || gameState.isGameComplete) return;
+    const interval = setInterval(() => {
+      setBrightness((prev) => Math.min(20, prev + 0.01));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [gameState.isStarted]);
 
   const loadNextScenario = () => {
     if (gameState.scenariosCompleted >= 15) {
@@ -129,7 +139,14 @@ const VietnamReformGame: React.FC = () => {
       selectedChoice: null,
       isStarted: false,
     });
+    setBrightness(1);
     setUsedScenarios([]);
+  };
+
+  const handleEat = () => {
+    if (gameState.isStarted && !gameState.isGameComplete) {
+      setBrightness((prev) => Math.max(1, prev - 0.1));
+    }
   };
 
   // Initialize first scenario
@@ -200,15 +217,19 @@ const VietnamReformGame: React.FC = () => {
         cursor: "none",
       }}
     >
-      <ModalManager />
-      <MouseFollower offsetX={-230} offsetY={180} />
-      <div className="max-w-4xl mx-auto">
+      <ModalManager brightness={brightness}/>
+      <MouseFollower offsetX={-230} offsetY={170} brightness={brightness}/>
+      <div
+        className="max-w-4xl mx-auto"
+        style={{ filter: `brightness(${brightness})` }}
+      >
         {gameState.isGameComplete ? (
           <EndScreen gameState={gameState} onRestart={restartGame} />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-1">
               <ScoreBoard gameState={gameState} />
+              <button onClick={handleEat} className="bg-zinc-50 hover:bg-zinc-300 rounded w-full p-3" style={{cursor: "none"}}>Ăn cơm</button>
             </div>
             <div className="lg:col-span-2 max-h-[90vh] overflow-x-visible overflow-y-auto no-scrollbar">
               {gameState.currentScenarioData && (
