@@ -4,10 +4,11 @@ import ScoreBoard from "./ScoreBoard";
 import ScenarioCard from "./ScenarioCard";
 import EndScreen from "./EndScreen";
 import { scenarios } from "../scenarios";
-import { EffectWeights, superWeights } from "../weights";
+import { EffectWeights } from "../weights";
 import FrutigerButton from "@/components/FrutigerButton";
 import MouseFollower from "./MouseFollower";
 import { ModalManager } from "./AnnoyingDialog";
+import Cookies from "js-cookie";
 
 function applyEffectWeights(choice: Choice, weights: EffectWeights): Choice {
   const modifiedEffects = {
@@ -50,6 +51,7 @@ function applyScenarioWeights(
 }
 
 const VietnamReformGame: React.FC = () => {
+  const [diffScale, setDiffScale] = useState(4);
   const [gameState, setGameState] = useState<GameState>({
     economy: 10,
     publicSupport: 50,
@@ -71,7 +73,10 @@ const VietnamReformGame: React.FC = () => {
       (s) => !usedScenarios.includes(s.id)
     );
     const randomIndex = Math.floor(Math.random() * availableScenarios.length);
-    return applyScenarioWeights(availableScenarios[randomIndex], superWeights);
+    return applyScenarioWeights(availableScenarios[randomIndex], {
+      negativeMultiplier: diffScale,
+      positiveMultiplier: 1,
+    });
   };
 
   useEffect(() => {
@@ -158,6 +163,18 @@ const VietnamReformGame: React.FC = () => {
 
   const onStart = () => {
     setGameState((prev) => ({ ...prev, isStarted: true }));
+    const prevDiff = Cookies.get("diff-scale");
+    if (!prevDiff) {
+      Cookies.set("diff-scale", diffScale.toString(), {
+        expires: new Date(Date.now() + 30 * 60 * 1000),
+      });
+    } else {
+      const newDiff = parseInt(prevDiff) * 2;
+      Cookies.set("diff-scale", newDiff.toString(), {
+        expires: new Date(Date.now() + 30 * 60 * 1000),
+      });
+      setDiffScale(newDiff);
+    }
   };
 
   if (!gameState.isStarted) {
@@ -217,8 +234,8 @@ const VietnamReformGame: React.FC = () => {
         cursor: "none",
       }}
     >
-      <ModalManager brightness={brightness}/>
-      <MouseFollower offsetX={-230} offsetY={170} brightness={brightness}/>
+      <ModalManager brightness={brightness} />
+      <MouseFollower offsetX={-230} offsetY={170} brightness={brightness} />
       <div
         className="max-w-4xl mx-auto"
         style={{ filter: `brightness(${brightness})` }}
@@ -229,7 +246,12 @@ const VietnamReformGame: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-1">
               <ScoreBoard gameState={gameState} />
-              <button onClick={handleEat} className="bg-zinc-50 hover:bg-zinc-300 rounded w-full p-3" style={{cursor: "none"}}>Ăn cơm</button>
+              <button
+                onClick={handleEat}
+                className="bg-zinc-50 hover:bg-zinc-300 rounded w-full p-3"
+              >
+                Ăn cơm
+              </button>
             </div>
             <div className="lg:col-span-2 max-h-[90vh] overflow-x-visible overflow-y-auto no-scrollbar">
               {gameState.currentScenarioData && (
