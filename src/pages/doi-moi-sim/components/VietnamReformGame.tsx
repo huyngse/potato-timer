@@ -7,6 +7,7 @@ import { scenarios } from "../scenarios";
 import { EffectWeights, superWeights } from "../weights";
 import FrutigerButton from "@/components/FrutigerButton";
 import MouseFollower from "./MouseFollower";
+import { ModalManager } from "./AnnoyingDialog";
 
 function applyEffectWeights(choice: Choice, weights: EffectWeights): Choice {
   const modifiedEffects = {
@@ -180,7 +181,9 @@ const VietnamReformGame: React.FC = () => {
           </p>
 
           <div className="flex justify-center">
-            <FrutigerButton onClick={onStart} variant="danger">Bắt Đầu Trò Chơi</FrutigerButton>
+            <FrutigerButton onClick={onStart} variant="danger">
+              Bắt Đầu Trò Chơi
+            </FrutigerButton>
           </div>
         </div>
       </div>
@@ -197,6 +200,7 @@ const VietnamReformGame: React.FC = () => {
         cursor: "none",
       }}
     >
+      <ModalManager />
       <MouseFollower offsetX={-230} offsetY={180} />
       <div className="max-w-4xl mx-auto">
         {gameState.isGameComplete ? (
