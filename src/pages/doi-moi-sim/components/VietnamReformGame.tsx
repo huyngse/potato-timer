@@ -9,6 +9,7 @@ import FrutigerButton from "@/components/FrutigerButton";
 import MouseFollower from "./MouseFollower";
 import { ModalManager } from "./AnnoyingDialog";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 function applyEffectWeights(choice: Choice, weights: EffectWeights): Choice {
   const modifiedEffects = {
@@ -180,7 +181,7 @@ const VietnamReformGame: React.FC = () => {
   if (!gameState.isStarted) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center p-6"
+        className="min-h-screen flex items-center justify-center p-6 flex-col"
         style={{
           background: `url("https://redsvn.net/wp-content/uploads/2017/01/Bao-cap.jpg")`,
           backgroundSize: "cover",
@@ -220,6 +221,9 @@ const VietnamReformGame: React.FC = () => {
             </FrutigerButton>
           </div>
         </div>
+        <p className="text-center text-xs text-zinc-400 mt-2">
+          <Link to={"/vnr"}>Xem timeline lịch sử Đảng</Link>
+        </p>
       </div>
     );
   }
