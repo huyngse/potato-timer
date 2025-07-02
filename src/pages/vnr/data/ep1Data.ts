@@ -433,4 +433,34 @@ export const ep1 = [
         start: "1945-03-12",
         group: GROUP_ID,
     },
+    {
+        id: "ep1-67",
+        content: "Thành lập Ủy ban Khởi nghĩa toàn quốc<br>(13/8/1945)",
+        start: "1945-08-13",
+        group: GROUP_ID,
+    },
+    {
+        id: "ep1-68",
+        content: "Ủy ban Khởi nghĩa toàn quốc ban bố “Quân lệnh số 1”,<br>(13/8/1945)",
+        start: "1945-08-13",
+        group: GROUP_ID,
+    },
+    {
+        id: "ep1-69",
+        content: "Hội nghị toàn quốc của Đảng họp ở Tân Trào,<br>khẩu hiệu đấu tranh: Phản đối xâm lược!<br>Hoàn toàn độc lập! Chính quyền nhân dân!<br>(14/8/1945)",
+        start: "1945-08-14",
+        group: GROUP_ID,
+    },
+    {
+        id: "ep1-70",
+        content: "Đại hội quốc dân họp tại Tân Trào<br>tán thành quyết định tổng khởi nghĩa của Đảng<br>lập Ủy ban giải phóng dân tộc Việt Nam<br>(16/8/1945)",
+        start: "1945-08-16",
+        group: GROUP_ID,
+    },
+    {
+        id: "ep1-71",
+        content: "Thủ đô Hà Nội tràn ngập cờ đỏ sao vàng<br>(19/8/1945)",
+        start: "1945-08-16",
+        group: GROUP_ID,
+    },
 ];

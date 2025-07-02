@@ -96,4 +96,32 @@ export const wlde = [
         group: GROUP_ID,
         style: WLD_STYLE
     },
+    {
+        id: "we-14",
+        content: "Mỹ ném bom nguyên tử xuống Hirôsima<br>(6/8/1945),",
+        start: "1945-08-06",
+        group: GROUP_ID,
+        style: WLD_STYLE
+    },
+    {
+        id: "we-15",
+        content: "Mỹ ném bom nguyên tử xuống Nagazaki<br>(9/8/1945),",
+        start: "1945-08-09",
+        group: GROUP_ID,
+        style: WLD_STYLE
+    },
+    {
+        id: "we-16",
+        content: "Chính phủ Nhật tuyên bố<br>đầu hàng Đồng minh không điều kiện<br>(15/8/1945),",
+        start: "1945-08-15",
+        group: GROUP_ID,
+        style: WLD_STYLE
+    },
+    {
+        id: "we-17",
+        content: "Hiệp ước Trùng Khánh(Hoa - Pháp)<br>(28/2/1946),",
+        start: "1946-02-18",
+        group: GROUP_ID,
+        style: WLD_STYLE
+    },
 ]
