@@ -1,4 +1,4 @@
-import { useGameStore } from "./useGameStore"
+import { useGameStore } from "./store/useGameStore"
 
 export function NhatKySuKien() {
   const nhatKy = useGameStore((s) => s.nhatKy)

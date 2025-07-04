@@ -1,4 +1,4 @@
-import { useGameStore } from "./useGameStore"
+import { useGameStore } from "./store/useGameStore"
 
 export function HangDangCho() {
   const hangDangCho = useGameStore((s) => s.hangDangCho)

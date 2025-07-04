@@ -168,4 +168,16 @@ export const ep2 = [
     //     group: GROUP_ID,
     //     style: IMP_STYLE,
     // },
+    {
+        id: "ep2-24",
+        content: "Chiến dịch Hòa Bình (10/12/1951-25/2/1952)",
+        start: "1951-12-10",
+        group: GROUP_ID,
+    },
+    {
+        id: "ep2-25",
+        content: "Kế hoạch Navarre (7/1953)",
+        start: "1953-07-01",
+        group: GROUP_ID,
+    },
 ];

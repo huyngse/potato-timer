@@ -1,4 +1,4 @@
-import { useGameStore } from "./useGameStore";
+import { useGameStore } from "./store/useGameStore";
 
 function TrangThaiSinhTon() {
   const { sucKhoe, dinhDuong, tinhThan } = useGameStore();

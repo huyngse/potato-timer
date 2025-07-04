@@ -64,5 +64,14 @@ export const ep3 = [
         group: GROUP_ID,
         style: "background: yellow;",
         className: "font-bold",
+    }, {
+        id: "ep3-10",
+        content:
+            "Điện Biên Phủ trên không<br>(10/12/1972)",
+        start: "1972-12-01",
+        group: GROUP_ID,
+        style: "background: yellow;",
+        className: "font-bold",
     },
+
 ];

@@ -1,6 +1,6 @@
 import TimeInfoPanel from "./TimeInfoPanel";
 import TrangThaiSinhTon from "./TrangThaiSinhTon";
-import { useGameStore } from "./useGameStore";
+import { useGameStore } from "./store/useGameStore";
 
 function Sidebar() {
   const { temGao, temThit, temVai } = useGameStore();

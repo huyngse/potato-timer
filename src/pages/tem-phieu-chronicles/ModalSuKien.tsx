@@ -1,4 +1,4 @@
-import { useGameStore } from "./useGameStore"
+import { useGameStore } from "./store/useGameStore"
 
 export function ModalSuKien() {
   const { suKienHomNay, dongSuKien } = useGameStore()

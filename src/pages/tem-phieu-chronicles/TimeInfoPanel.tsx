@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useGameStore } from "./useGameStore";
+import { useGameStore } from "./store/useGameStore";
 
 function usePrevious<T>(value: T): T | undefined {
     const ref = useRef<T>()

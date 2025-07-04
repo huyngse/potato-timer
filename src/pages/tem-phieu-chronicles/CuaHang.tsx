@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useGameStore } from "./useGameStore"
+import { useGameStore } from "./store/useGameStore"
 import { HANG_HOA } from "./hangHoa"
 
 export function CuaHang() {
