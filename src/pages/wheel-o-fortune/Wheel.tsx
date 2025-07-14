@@ -30,22 +30,29 @@ const Wheel = ({ onSpinResult, disabled }: WheelProps) => {
     const segmentCount = segments.length;
     const anglePerSegment = 360 / segmentCount;
 
-    const randomIndex = Math.floor(Math.random() * segmentCount);
-    const spins = 5 + Math.floor(Math.random() * 3);
-    const baseRotation = spins * 360;
+    const minSpins = 5;
+    const maxSpins = 7;
+    const spins =
+      minSpins + Math.floor(Math.random() * (maxSpins - minSpins + 1));
 
-    const pointerAngle = 270;
-    const targetSegmentAngle =
-      randomIndex * anglePerSegment + anglePerSegment / 2;
-    const targetRotation = baseRotation + pointerAngle - targetSegmentAngle;
+    const extraDegrees = Math.floor(Math.random() * 360); // makes the result feel random
+    const totalRotation = spins * 360 + extraDegrees;
 
-    const newRotation = rotation + targetRotation;
-    setRotation(newRotation);
+    setRotation((prev) => prev + totalRotation); // cumulative rotation!
     setSpinning(true);
 
     setTimeout(() => {
       setSpinning(false);
-      onSpinResult(segments[randomIndex]);
+
+      // figure out final angle after all rotation
+      const finalAngle = (rotation + totalRotation) % 360;
+      const pointerAngle = 270;
+      const adjustedAngle = (pointerAngle - finalAngle + 360) % 360;
+
+      const landedIndex = Math.floor(adjustedAngle / anglePerSegment);
+      const result = segments[landedIndex];
+
+      onSpinResult(result);
     }, 10000);
   };
 
