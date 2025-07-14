@@ -28,10 +28,17 @@ const PlayersPanel: React.FC<PlayersPanelProps> = ({
                 : "bg-gray-100 border-gray-300"
             }`}
           >
-            <div className="flex justify-between">
-              <span>{player.name} <span className="text-xs text-zinc-400">({player.score})</span></span>
-              <span>${player.roundScore}</span>
-            </div>
+            <p className="font-bold ">
+              {player.name}{" "}
+              <span
+                className="text-zinc-500 text-center"
+                style={{ fontSize: "0.7rem" }}
+              >
+               ({player.score})
+              </span>
+            </p>
+
+            <p className="text-xl">${player.roundScore}</p>
           </li>
         ))}
       </ul>

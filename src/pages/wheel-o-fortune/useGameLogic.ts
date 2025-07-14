@@ -1,7 +1,7 @@
 // useGameLogic.ts
 import { useEffect, useState } from "react";
-import { VOWEL_COST, VOWELS, puzzles, FINAL_ROUND } from "./constants";
-import { speakDesiUncle } from "./ttsHelper";
+import { VOWEL_COST, VOWELS, puzzles, FINAL_ROUND, DIALOGUES } from "./constants";
+import { speakVietnamese } from "./ttsHelper";
 
 export type Player = {
     id: number;
@@ -9,6 +9,9 @@ export type Player = {
     score: number;
     roundScore: number;
 };
+
+const getRandomLine = (lines: any[]) =>
+    lines[Math.floor(Math.random() * lines.length)];
 
 export const useGameLogic = () => {
     const [revealedLetters, setRevealedLetters] = useState(["L", "O"]);
@@ -18,7 +21,7 @@ export const useGameLogic = () => {
     const [currentSpinValue, setCurrentSpinValue] = useState<string | null>(null);
     const [buyVowelMode, setBuyVowelMode] = useState(false);
     const [round, setRound] = useState(1);
-    const [puzzle, setPuzzle] = useState(puzzles[0]);
+    const [puzzle, setPuzzle] = useState(atob(puzzles[0]));
     const [isGameOver, setIsGameOver] = useState(false);
 
     useEffect(() => {
@@ -39,14 +42,14 @@ export const useGameLogic = () => {
 
     const handleSpinResult = (value: string) => {
         if (value === "BANKRUPT") {
-            speakDesiUncle("Arre beta your luck went bankrupt Better luck next time ok?");
+            speakVietnamese(getRandomLine(DIALOGUES.bankrupt));
             updatePlayer(currentPlayerIndex, { roundScore: 0 });
             nextPlayer();
         } else if (value === "LOSE TURN") {
-            speakDesiUncle("Oho You lost your turn What to do, what to do...");
+            speakVietnamese(getRandomLine(DIALOGUES.loseTurn));
             nextPlayer();
         } else {
-            speakDesiUncle(`Wah wah You got ${value}, Now make your mummy proud.`);
+            speakVietnamese(getRandomLine(DIALOGUES.spinSuccess)(value));
             setCurrentSpinValue(value);
         }
     };
@@ -63,9 +66,9 @@ export const useGameLogic = () => {
         const isCorrect = puzzle.includes(letter);
         setUsedLetters((prev) => [...prev, letter]);
         if (isCorrect) {
-            speakDesiUncle(`Aree wah. Letter ${letter} is there full marks beta!`);
+            speakVietnamese(getRandomLine(DIALOGUES.correctLetter)(letter));
         } else {
-            speakDesiUncle(`Oh ho ho. Letter ${letter} is not in the puzzle...`);
+            speakVietnamese(getRandomLine(DIALOGUES.wrongLetter)(letter));
         }
 
         if (buyVowelMode && VOWELS.includes(letter)) {
@@ -112,15 +115,15 @@ export const useGameLogic = () => {
     };
 
     const handleGuessPhrase = () => {
-        const guess = window.prompt("🌼 what's your guess for the phrase?");
+        const guess = window.prompt("Đoán đi bạn ơi?");
         if (!guess) return;
 
         const normalizedGuess = guess.trim().toUpperCase();
 
         if (normalizedGuess === puzzle) {
-            speakDesiUncle(`Shabash ${currentPlayer.name} got it Genius level yaar.`);
+            speakVietnamese(getRandomLine(DIALOGUES.phraseCorrect)(currentPlayer.name));
         } else {
-            speakDesiUncle(`Nahi beta... that is not the phrase. Try again next time.`);
+            speakVietnamese(getRandomLine(DIALOGUES.phraseWrong));
         }
 
         if (normalizedGuess === puzzle) {
@@ -130,11 +133,11 @@ export const useGameLogic = () => {
             setRevealedLetters(puzzle.split(""));
 
             setTimeout(() => {
-                alert(`🎉 ${currentPlayer.name} guessed it right!`);
+                alert(`🎉 ${currentPlayer.name} đoán đúng rồi!`);
                 startNewRound();
             }, 1000);
         } else {
-            alert(`😢 oops! that's not the phrase.`);
+            alert(`😢 U là trời, đoán sai rồi.`);
             nextPlayer();
         }
     };
@@ -152,13 +155,13 @@ export const useGameLogic = () => {
         );
 
         if (nextRound > FINAL_ROUND) {
-            speakDesiUncle("Game over doston. Time to count your blessings and your score!");
+            speakVietnamese(getRandomLine(DIALOGUES.gameOver));
             setIsGameOver(true);
             return;
         }
-        speakDesiUncle(`Ok chalo round number ${nextRound} is starting. Get ready!`);
+        speakVietnamese(getRandomLine(DIALOGUES.roundStart)(nextRound));
 
-        const nextPuzzle = puzzles[(nextRound - 1) % puzzles.length];
+        const nextPuzzle = atob(puzzles[(nextRound - 1) % puzzles.length]);
 
         setRound(nextRound);
         setPuzzle(nextPuzzle);

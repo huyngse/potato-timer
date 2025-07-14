@@ -18,7 +18,7 @@ const segments = [
   "$800",
 ];
 
-const colors = ["#f87171", "#facc15"];
+const colors = ["#7432a2", "#01adfb", "#ee1000", "#09a755", "#040404"];
 
 const Wheel = ({ onSpinResult, disabled }: WheelProps) => {
   const [spinning, setSpinning] = useState(false);
@@ -104,7 +104,7 @@ const Wheel = ({ onSpinResult, disabled }: WheelProps) => {
                     textOrientation: "mixed",
                     fontWeight: "bold",
                     fontSize: "0.75rem",
-                    color: "#000",
+                    color: "white",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -120,7 +120,7 @@ const Wheel = ({ onSpinResult, disabled }: WheelProps) => {
 
         {/* pointer on the left side (at 270°) 🌻 */}
         <div className="absolute left-[0px] top-1/2 transform -translate-y-1/2 z-20 rotate-180">
-          <div className="w-0 h-0 border-t-8 border-b-8 border-r-[20px] border-t-transparent border-b-transparent border-r-red-600" />
+          <div className="w-0 h-0 border-t-8 border-b-8 border-r-[20px] border-t-transparent border-b-transparent border-r-[#fdf806]" />
         </div>
       </div>
 
@@ -132,7 +132,7 @@ const Wheel = ({ onSpinResult, disabled }: WheelProps) => {
           spinning ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {spinning ? "spinning..." : "💥 spin the wheel 💥"}
+        {spinning ? "Đang xoay..." : "💥 Xoay Nón 💥"}
       </button>
     </div>
   );

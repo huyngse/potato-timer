@@ -5,7 +5,7 @@ type PuzzleBoardProps = {
 
 const PuzzleBoard = ({ puzzle, revealedLetters }: PuzzleBoardProps) => {
   return (
-    <div className="grid grid-cols-12 gap-2 p-4 justify-center">
+    <div className="flex flex-wrap gap-2 p-4 justify-center">
       {puzzle.split("").map((char, index) => {
         const upperChar = char.toUpperCase();
         const isRevealed = revealedLetters.includes(upperChar);
@@ -14,7 +14,7 @@ const PuzzleBoard = ({ puzzle, revealedLetters }: PuzzleBoardProps) => {
         return (
           <div
             key={index}
-            className={`w-10 h-14 flex items-center justify-center text-xl font-bold rounded-2xl border 
+            className={`w-10 h-14 flex items-center justify-center text-xl font-bold rounded-2xl border select-none pointer-events-none 
             ${
               isSpace
                 ? "bg-transparent border-none"
