@@ -109,3 +109,52 @@ button {
 .vis-item .vis-item-content {
   text-align: left;
 }
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.lixi-rain-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.lixi {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  background-image: url('/lixi.png'); /* Add a lì xì image to public folder */
+  background-size: cover;
+  animation: fall linear infinite;
+}
+
+@keyframes sway {
+  0% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(-2deg);
+  }
+}
+
+
+.apricot-tree {
+  animation: sway 8s ease-in-out infinite;
+  pointer-events: none;
+}

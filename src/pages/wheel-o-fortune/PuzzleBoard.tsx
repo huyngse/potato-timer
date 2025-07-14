@@ -4,29 +4,30 @@ type PuzzleBoardProps = {
 };
 
 const PuzzleBoard = ({ puzzle, revealedLetters }: PuzzleBoardProps) => {
-  return (
-    <div className="flex flex-wrap gap-2 p-4 justify-center">
-      {puzzle.split("").map((char, index) => {
-        const upperChar = char.toUpperCase();
-        const isRevealed = revealedLetters.includes(upperChar);
-        const isSpace = char === " ";
+  const words = puzzle.split(" ");
 
-        return (
-          <div
-            key={index}
-            className={`w-10 h-14 flex items-center justify-center text-xl font-bold rounded-2xl border select-none pointer-events-none 
-            ${
-              isSpace
-                ? "bg-transparent border-none"
-                : "bg-white border-gray-400 shadow-sm"
-            }
-            ${isRevealed ? "text-black" : "text-transparent"}
-          `}
-          >
-            {isSpace ? "" : upperChar}
-          </div>
-        );
-      })}
+  return (
+    <div className="flex flex-wrap gap-x-14 gap-y-3 justify-center p-4 bg-green-600">
+      {words.map((word, wordIndex) => (
+        <div key={wordIndex} className="flex gap-2">
+          {word.split("").map((char, letterIndex) => {
+            const upperChar = char.toUpperCase();
+            const isRevealed = revealedLetters.includes(upperChar);
+
+            return (
+              <div
+                key={letterIndex}
+                className={`w-10 h-14 flex items-center justify-center text-xl font-bold border select-none pointer-events-none
+                  bg-white border-gray-400 shadow-sm
+                  ${isRevealed ? "text-black" : "text-transparent"}
+                `}
+              >
+                {upperChar}
+              </div>
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 };

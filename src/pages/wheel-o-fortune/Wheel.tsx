@@ -72,7 +72,7 @@ const Wheel = ({ onSpinResult, disabled }: WheelProps) => {
       <div className="relative w-72 h-72 rounded-full overflow-hidden shadow-2xl">
         {/* spinning wheel */}
         <div
-          className="absolute inset-0 transition-transform duration-[10s] ease-out rounded-full"
+          className="absolute inset-0 transition-transform duration-[10s] ease-out rounded-full border-4 border-white"
           style={{
             transform: `rotate(${rotation}deg)`,
           }}

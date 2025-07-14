@@ -17,7 +17,7 @@ const PlayersPanel: React.FC<PlayersPanelProps> = ({
   currentPlayerIndex,
 }) => {
   return (
-    <div className="bg-white shadow-lg p-4 w-full mx-auto mb-6 border border-yellow-300">
+    <div className="bg-red-600 shadow-lg p-4 w-full mx-auto border border-red-900">
       <ul className="grid grid-cols-3 gap-3">
         {players.map((player, index) => (
           <li
