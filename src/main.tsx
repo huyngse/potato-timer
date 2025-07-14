@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import VietnamReformGame from "./pages/doi-moi-sim/components/VietnamReformGame.tsx";
 import TemPhieuChronicles from "./pages/tem-phieu-chronicles/TemPhieuChronicles.tsx";
 import ChaosBoard from "./pages/chaos-board/chaos-board.tsx";
+import WheelOfFortunePage from "./pages/wheel-o-fortune/WheelOfFortunePage.tsx";
 
 const VNRPage = lazy(() => import("./pages/vnr/VNRPage.tsx"));
 const router = createBrowserRouter([
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "doi-moi-simulator", element: <VietnamReformGame /> },
       { path: "tem-phieu-su-ki", element: <TemPhieuChronicles /> },
       { path: "chaos-board", element: <ChaosBoard /> },
+      { path: "wheel-o-fortune", element: <WheelOfFortunePage /> },
     ],
   },
 ]);
