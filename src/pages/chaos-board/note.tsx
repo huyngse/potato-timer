@@ -10,22 +10,24 @@ export type NoteProps = {
   color: string;
   zIndex?: number;
   rotation?: number;
+  decorMode?: boolean;
   onUpdate: (id: string, updates: Partial<NoteProps>) => void;
   onDelete: (id: string) => void;
 };
 
 const Note = ({
   id,
-  x,
-  y,
-  width,
-  height,
-  content,
-  color,
-  zIndex,
+  x = 100,
+  y = 100,
+  width = 200,
+  height = 150,
+  content = "",
+  color = `hsl(${Math.floor(Math.random() * 360)}, 70%, 80%)`,
+  zIndex = 1,
   rotation = 0,
-  onUpdate,
-  onDelete,
+  decorMode = false,
+  onUpdate = () => {},
+  onDelete = () => {},
 }: NoteProps) => {
   const noteRef = useRef<HTMLDivElement>(null);
 
@@ -111,63 +113,87 @@ const Note = ({
     document.addEventListener("mouseup", onMouseUp);
   };
 
+  const handleDoubleClick = () => {
+    onUpdate(id, { decorMode: !decorMode });
+  };
+
   return (
     <div
       ref={noteRef}
-      className="absolute shadow-xl rounded overflow-hidden"
+      className={`absolute rounded overflow-hidden ${
+        decorMode ? "" : "shadow-xl"
+      }`}
       style={{
         top: y,
         left: x,
         width,
         height,
-        backgroundColor: color,
+        backgroundColor: decorMode ? "transparent" : color,
         zIndex: zIndex ?? 1,
         transform: `rotate(${rotation ?? 0}deg)`,
         transformOrigin: "center center",
       }}
     >
-      <div className="flex justify-between items-center bg-black/20 px-2 text-sm text-black select">
-        <button
-          onMouseDown={(e) => handleRotate(e)}
-          className="cursor-pointer"
-          title="Rotate me ♻️"
-        >
-          ♻️
-        </button>
-        <button
-          onMouseDown={handleDrag}
-          className="cursor-grab active:cursor-grabbing py-1 font-semibold flex-1 text-right px-2"
-          title="Drag me 🖐️"
-        >
-          ⋮⋮
-        </button>
-        <button
-          onClick={() => onDelete(id)}
-          className="text-red-600 hover:text-red-800 font-bold"
-        >
-          ✖️
-        </button>
-      </div>
+      {decorMode ? (
+        <div className="opacity-0 select-none py-1">Invisible</div>
+      ) : (
+        <div className="flex justify-between items-center py-1 bg-black/20 px-2 text-sm text-black select-none">
+          <button
+            onMouseDown={(e) => handleRotate(e)}
+            className="cursor-pointer"
+            title="Rotate me ♻️"
+          >
+            ♻️
+          </button>
+          <button
+            onMouseDown={handleDrag}
+            className="cursor-grab active:cursor-grabbing font-semibold flex-1 text-right px-2"
+            title="Drag me 🖐️"
+          >
+            ⋮⋮
+          </button>
+          <button
+            className="cursor-pointer"
+            onClick={() => {
+              onUpdate(id, { decorMode: true });
+            }}
+          >
+            🌿
+          </button>
+          <button
+            onClick={() => onDelete(id)}
+            className="text-red-600 hover:text-red-800 font-bold"
+          >
+            ✖️
+          </button>
+        </div>
+      )}
 
       {content.startsWith("data:image") ? (
         <img
           src={content}
           alt="clipboard"
           className="w-full h-[calc(100%-2rem)] object-contain"
+          onDoubleClick={decorMode ? handleDoubleClick : () => {}}
         />
       ) : (
         <textarea
+          readOnly={decorMode}
+          tabIndex={decorMode ? -1 : 0}
           className="w-full h-[calc(100%-2rem)] resize-none bg-transparent focus:outline-none p-2"
           value={content}
           onChange={(e) => onUpdate(id, { content: e.target.value })}
+          onDoubleClick={decorMode ? handleDoubleClick : () => {}}
         />
       )}
 
       {/* Resize handle */}
-      <div
-        onMouseDown={handleResize}
-        className="absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize bg-black/10 select-none"
-      ></div>
+      {!decorMode && (
+        <div
+          onMouseDown={handleResize}
+          className="absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize bg-black/10"
+        ></div>
+      )}
     </div>
   );
 };
