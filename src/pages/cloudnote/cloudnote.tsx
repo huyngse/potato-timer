@@ -7,7 +7,7 @@ type FullNote = NoteProps;
 const getRandomColor = () =>
   `hsl(${Math.floor(Math.random() * 360)}, 70%, 80%)`;
 
-const ChaosBoard = () => {
+const CloudNote = () => {
   const [notes, setNotes] = useState<FullNote[]>(() => {
     const saved = localStorage.getItem("chaos-notes");
     return saved ? JSON.parse(saved) : [];
@@ -104,7 +104,7 @@ const ChaosBoard = () => {
   };
 
   return (
-    <div className="w-full h-screen relative bg-zinc-200 overflow-auto">
+    <div className="w-full h-screen relative bg-slate-100 overflow-auto">
       <button
         onClick={addNote}
         className="absolute top-4 left-4 bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600 z-50"
@@ -139,4 +139,4 @@ const ChaosBoard = () => {
   );
 };
 
-export default ChaosBoard;
+export default CloudNote;
