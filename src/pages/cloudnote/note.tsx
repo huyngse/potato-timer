@@ -11,6 +11,8 @@ export type NoteProps = {
   zIndex?: number;
   rotation?: number;
   decorMode?: boolean;
+  isActive?: boolean;
+  onActivate?: (id: string) => void;
   onUpdate: (id: string, updates: Partial<NoteProps>) => void;
   onDelete: (id: string) => void;
 };
@@ -26,8 +28,10 @@ const Note = ({
   zIndex = 1,
   rotation = 0,
   decorMode = false,
+  isActive = false,
   onUpdate = () => {},
   onDelete = () => {},
+  onActivate = () => {},
 }: NoteProps) => {
   const noteRef = useRef<HTMLDivElement>(null);
 
@@ -120,80 +124,91 @@ const Note = ({
   return (
     <div
       ref={noteRef}
-      className={`absolute rounded overflow-hidden ${
-        decorMode ? "" : "shadow-xl"
-      }`}
+      className="absolute note"
       style={{
         top: y,
         left: x,
-        width,
-        height,
-        backgroundColor: decorMode ? "transparent" : color,
-        zIndex: zIndex ?? 1,
         transform: `rotate(${rotation ?? 0}deg)`,
         transformOrigin: "center center",
+        zIndex: zIndex ?? 1,
       }}
     >
-      {decorMode ? (
-        <div className="opacity-0 select-none py-1">Invisible</div>
-      ) : (
-        <div className="flex justify-between items-center py-1 bg-black/20 px-2 text-sm text-black select-none">
+      {isActive && !decorMode && (
+        <div className="absolute -top-8 right-0 flex gap-2 z-10">
           <button
             onMouseDown={(e) => handleRotate(e)}
-            className="cursor-pointer"
-            title="Rotate me ♻️"
+            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer"
+            title="rotate me ♻️"
           >
             ♻️
           </button>
           <button
-            onMouseDown={handleDrag}
-            className="cursor-grab active:cursor-grabbing font-semibold flex-1 text-right px-2"
-            title="Drag me 🖐️"
-          >
-            ⋮⋮
-          </button>
-          <button
-            className="cursor-pointer"
-            onClick={() => {
-              onUpdate(id, { decorMode: true });
-            }}
+            onClick={() => onUpdate(id, { decorMode: true })}
+            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer"
+            title="decorate 🌿"
           >
             🌿
           </button>
           <button
             onClick={() => onDelete(id)}
-            className="text-red-600 hover:text-red-800 font-bold"
+            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer"
+            title="delete ✖️"
           >
             ✖️
           </button>
         </div>
       )}
+      <div
+        className={` rounded overflow-hidden ${decorMode ? "" : "shadow-xl"}`}
+        style={{
+          width,
+          height,
+          backgroundColor: decorMode ? "transparent" : color,
+        }}
+        onMouseDown={() => {
+          if (!decorMode) {
+            onActivate?.(id);
+          }
+        }}
+      >
+        {decorMode ? (
+          <div className="opacity-0 select-none py-1">Invisible</div>
+        ) : (
+          <button
+            className="py-1 bg-black/20 text-sm text-black select-none cursor-grab active:cursor-grabbing font-semibold text-right px-2 w-full"
+            onMouseDown={handleDrag}
+            title="Drag me 🖐️"
+          >
+            ⋮⋮
+          </button>
+        )}
 
-      {content.startsWith("data:image") ? (
-        <img
-          src={content}
-          alt="clipboard"
-          className="w-full h-[calc(100%-2rem)] object-contain"
-          onDoubleClick={decorMode ? handleDoubleClick : () => {}}
-        />
-      ) : (
-        <textarea
-          readOnly={decorMode}
-          tabIndex={decorMode ? -1 : 0}
-          className="w-full h-[calc(100%-2rem)] resize-none bg-transparent focus:outline-none p-2"
-          value={content}
-          onChange={(e) => onUpdate(id, { content: e.target.value })}
-          onDoubleClick={decorMode ? handleDoubleClick : () => {}}
-        />
-      )}
+        {content.startsWith("data:image") ? (
+          <img
+            src={content}
+            alt="clipboard"
+            className="w-full h-[calc(100%-2rem)] object-contain"
+            onDoubleClick={decorMode ? handleDoubleClick : () => {}}
+          />
+        ) : (
+          <textarea
+            readOnly={decorMode}
+            tabIndex={decorMode ? -1 : 0}
+            className="w-full h-[calc(100%-2rem)] resize-none bg-transparent focus:outline-none p-2"
+            value={content}
+            onChange={(e) => onUpdate(id, { content: e.target.value })}
+            onDoubleClick={decorMode ? handleDoubleClick : () => {}}
+          />
+        )}
 
-      {/* Resize handle */}
-      {!decorMode && (
-        <div
-          onMouseDown={handleResize}
-          className="absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize bg-black/10"
-        ></div>
-      )}
+        {/* Resize handle */}
+        {!decorMode && (
+          <div
+            onMouseDown={handleResize}
+            className="absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize bg-black/10"
+          ></div>
+        )}
+      </div>
     </div>
   );
 };

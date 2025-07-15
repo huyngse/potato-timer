@@ -85,7 +85,7 @@ const CloudNote = () => {
       height: 150,
       content: "Type something...",
       color: getRandomColor(),
-      rotation: 0, 
+      rotation: 0,
       onUpdate: () => {},
       onDelete: () => {},
     };
@@ -96,7 +96,6 @@ const CloudNote = () => {
     setNotes((prev) =>
       prev.map((note) => (note.id === id ? { ...note, ...updates } : note))
     );
-    setActiveNoteId(id); // bring to front!
   };
 
   const deleteNote = (id: string) => {
@@ -124,6 +123,11 @@ const CloudNote = () => {
           ),
           position: "relative",
         }}
+        onClick={(e) => {
+          if (!(e.target as HTMLElement).closest(".note")) {
+            setActiveNoteId(null);
+          }
+        }}
       >
         {notes.map((note) => (
           <Note
@@ -132,6 +136,8 @@ const CloudNote = () => {
             onUpdate={updateNote}
             onDelete={deleteNote}
             zIndex={note.id === activeNoteId ? 999 : 1}
+            isActive={note.id === activeNoteId}
+            onActivate={setActiveNoteId}
           />
         ))}
       </div>
