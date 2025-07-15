@@ -29,10 +29,6 @@
   font-family: sans-serif;
 }
 
-button {
-  cursor: pointer;
-}
-
 @layer utilities {
 
   /* Chrome, Safari, Opera */

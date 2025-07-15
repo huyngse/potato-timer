@@ -85,6 +85,7 @@ const ChaosBoard = () => {
       height: 150,
       content: "Type something...",
       color: getRandomColor(),
+      rotation: 0, 
       onUpdate: () => {},
       onDelete: () => {},
     };
@@ -103,7 +104,7 @@ const ChaosBoard = () => {
   };
 
   return (
-    <div className="w-full h-screen relative bg-zinc-200 overflow-hidden">
+    <div className="w-full h-screen relative bg-zinc-200 overflow-auto">
       <button
         onClick={addNote}
         className="absolute top-4 left-4 bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600 z-50"
@@ -111,15 +112,29 @@ const ChaosBoard = () => {
         Add Note
       </button>
 
-      {notes.map((note) => (
-        <Note
-          key={note.id}
-          {...note}
-          onUpdate={updateNote}
-          onDelete={deleteNote}
-          zIndex={note.id === activeNoteId ? 999 : 1} // ✨ MAGIC!
-        />
-      ))}
+      <div
+        style={{
+          width: Math.max(
+            ...notes.map((n) => n.x + n.width),
+            window.innerWidth
+          ),
+          height: Math.max(
+            ...notes.map((n) => n.y + n.height),
+            window.innerHeight
+          ),
+          position: "relative",
+        }}
+      >
+        {notes.map((note) => (
+          <Note
+            key={note.id}
+            {...note}
+            onUpdate={updateNote}
+            onDelete={deleteNote}
+            zIndex={note.id === activeNoteId ? 999 : 1}
+          />
+        ))}
+      </div>
     </div>
   );
 };

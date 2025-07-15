@@ -124,4 +124,11 @@ export const wlde = [
         group: GROUP_ID,
         style: WLD_STYLE
     },
+    {
+        id: "we-18",
+        content: "Khủng hoảng tên lửa<br>(1962),",
+        start: "1962-10-14",
+        group: GROUP_ID,
+        style: WLD_STYLE
+    },
 ]
