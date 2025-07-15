@@ -12,6 +12,7 @@ export type NoteProps = {
   rotation?: number;
   decorMode?: boolean;
   isActive?: boolean;
+  lockDecor?: boolean;
   onActivate?: (id: string) => void;
   onUpdate: (id: string, updates: Partial<NoteProps>) => void;
   onDelete: (id: string) => void;
@@ -29,6 +30,7 @@ const Note = ({
   rotation = 0,
   decorMode = false,
   isActive = false,
+  lockDecor = false,
   onUpdate = () => {},
   onDelete = () => {},
   onActivate = () => {},
@@ -134,24 +136,24 @@ const Note = ({
       }}
     >
       {isActive && !decorMode && (
-        <div className="absolute -top-8 right-0 flex gap-2 z-10">
+        <div className="absolute -top-8 right-0 flex gap-2 z-10 select-none">
           <button
             onMouseDown={(e) => handleRotate(e)}
-            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer"
+            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer duration-300"
             title="rotate me ♻️"
           >
             ♻️
           </button>
           <button
             onClick={() => onUpdate(id, { decorMode: true })}
-            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer"
+            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer duration-300"
             title="decorate 🌿"
           >
             🌿
           </button>
           <button
             onClick={() => onDelete(id)}
-            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer"
+            className="bg-white shadow rounded-full p-1 text-sm hover:bg-gray-100 cursor-pointer duration-300"
             title="delete ✖️"
           >
             ✖️
@@ -188,7 +190,9 @@ const Note = ({
             src={content}
             alt="clipboard"
             className="w-full h-[calc(100%-2rem)] object-contain"
-            onDoubleClick={decorMode ? handleDoubleClick : () => {}}
+            onDoubleClick={
+              decorMode && !lockDecor ? handleDoubleClick : undefined
+            }
           />
         ) : (
           <textarea
@@ -197,7 +201,9 @@ const Note = ({
             className="w-full h-[calc(100%-2rem)] resize-none bg-transparent focus:outline-none p-2"
             value={content}
             onChange={(e) => onUpdate(id, { content: e.target.value })}
-            onDoubleClick={decorMode ? handleDoubleClick : () => {}}
+            onDoubleClick={
+              decorMode && !lockDecor ? handleDoubleClick : undefined
+            }
           />
         )}
 

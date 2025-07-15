@@ -13,6 +13,7 @@ const CloudNote = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [activeNoteId, setActiveNoteId] = useState<string | null>(null);
+  const [lockDecor, setLockDecor] = useState(true);
 
   useEffect(() => {
     localStorage.setItem("chaos-notes", JSON.stringify(notes));
@@ -104,13 +105,22 @@ const CloudNote = () => {
 
   return (
     <div className="w-full h-screen relative bg-slate-100 overflow-auto">
-      <button
-        onClick={addNote}
-        className="absolute top-4 left-4 bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600 z-50"
-      >
-        Add Note
-      </button>
-
+      <div className="flex justify-end bottom-0 gap-3 fixed w-full z-[1000] p-3">
+        <button
+          onClick={addNote}
+          className="bg-white shadow rounded-full p-2 text-sm hover:bg-gray-100 cursor-pointer duration-300"
+          title="➕ Add Note"
+        >
+          ➕
+        </button>
+        <button
+          onClick={() => setLockDecor((prev) => !prev)}
+          className="bg-white shadow rounded-full p-2 text-sm hover:bg-gray-100 cursor-pointer duration-300"
+          title={lockDecor ? "Unlock Decor 🔓" : "Lock Decor 🔒"}
+        >
+          {lockDecor ? "🔒" : "🔓"}
+        </button>
+      </div>
       <div
         style={{
           width: Math.max(
@@ -138,6 +148,7 @@ const CloudNote = () => {
             zIndex={note.id === activeNoteId ? 999 : 1}
             isActive={note.id === activeNoteId}
             onActivate={setActiveNoteId}
+            lockDecor={lockDecor}
           />
         ))}
       </div>
