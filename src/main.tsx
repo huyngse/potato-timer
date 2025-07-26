@@ -8,6 +8,7 @@ import VietnamReformGame from "./pages/doi-moi-sim/components/VietnamReformGame.
 import TemPhieuChronicles from "./pages/tem-phieu-chronicles/TemPhieuChronicles.tsx";
 import CloudNote from "./pages/cloudnote/cloudnote.tsx";
 import WheelOfFortunePage from "./pages/wheel-o-fortune/WheelOfFortunePage.tsx";
+import MessengerMemeCreator from "./messenger-meme-creator/MessengerMemeCreator.tsx";
 
 const VNRPage = lazy(() => import("./pages/vnr/VNRPage.tsx"));
 const router = createBrowserRouter([
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "tem-phieu-su-ki", element: <TemPhieuChronicles /> },
       { path: "cloudnote", element: <CloudNote /> },
       { path: "wheel-o-fortune", element: <WheelOfFortunePage /> },
+      { path: "messenger-meme-creator", element: <MessengerMemeCreator /> },
     ],
   },
 ]);
